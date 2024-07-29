@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 }
-(오류)
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
