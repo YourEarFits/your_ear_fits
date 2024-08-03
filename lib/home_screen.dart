@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:your_ear_fits/Account/Logout.dart';
-import 'package:your_ear_fits/Account/login.dart';
+import 'package:your_ear_fits/my_page_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,44 +8,119 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Home'),
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Your Ear Fits',
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w600,
+                color: Colors.lightBlue),
+          ),
+          centerTitle: true,
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '메인화면입니다.',
-                style: TextStyle(fontSize: 30),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    labelText: '이어폰을 검색하세요!',
+                  ),
+                ),
               ),
-              const SizedBox(height: 20),
-              // 로그인 상태에 따라 다른 위젯을 보여줍니다.
-              StreamBuilder(
-                stream: FirebaseAuth.instance.authStateChanges(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.person_search_rounded, size: 50),
+                          ),
+                          const Text("귀 모양 검사")
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.search, size: 50),
+                          ),
+                          const Text("이어폰 보러가기"),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // 하단 여백을 위한 SizedBox
+                  const SizedBox(height: 250),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.event, size: 50),
+                      ),
+                      const Text('이벤트'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.search, size: 50),
+                      ),
+                      const Text('검색'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.home, size: 50),
+                      ),
+                      const Text('홈'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.earbuds, size: 50),
+                      ),
+                      const Text('귀 검사'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginScreen()));
-                      },
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(fontSize: 30),
+                              builder: (context) => const MyPageScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.account_circle, size: 50),
                       ),
-                    );
-                  }
-                  return Column(
-                    children: [
-                      Text(
-                          'Logged In: ${FirebaseAuth.instance.currentUser!.uid}'),
-                      const LogoutWidget(),
+                      const Text('마이페이지'),
                     ],
-                  );
-                },
+                  )
+                ],
               ),
             ],
           ),
