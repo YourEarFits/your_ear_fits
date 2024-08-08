@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/Account/login_screen.dart';
-import 'package:your_ear_fits/Account/logout_screen.dart';
+import 'package:your_ear_fits/Account/logout_widget.dart';
 
 class MyPageScreen extends StatelessWidget {
   const MyPageScreen({super.key});
