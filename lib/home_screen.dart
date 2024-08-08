@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_screen.dart';
 import 'package:your_ear_fits/my_page_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,7 +54,14 @@ class HomeScreen extends StatelessWidget {
                       Column(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const EarbudsListScreen(),
+                                ),
+                              );
+                            },
                             icon: const Icon(Icons.search, size: 50),
                           ),
                           const Text("이어폰 보러가기"),
