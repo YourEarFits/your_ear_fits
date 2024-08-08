@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/Earbuds/earbuds_list_screen.dart';
 import 'package:your_ear_fits/my_page_screen.dart';
+import 'package:your_ear_fits/event_page_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -79,7 +80,14 @@ class HomeScreen extends StatelessWidget {
                   Column(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const EventPageScreen(),
+                            ),
+                          );
+                        },
                         icon: const Icon(Icons.event, size: 50),
                       ),
                       const Text('이벤트'),
