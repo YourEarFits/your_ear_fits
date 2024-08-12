@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:your_ear_fits/Account/login.dart';
+import 'package:your_ear_fits/Account/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,31 +14,22 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final StreamController<String> _loginMessageController = StreamController<String>();
+  final StreamController<String> _loginMessageController =
+      StreamController<String>();
 
-  Future<void> _login() async {
+  void _login() {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    print('Email: $email, Password: $password');
-    // Firebase Auth 로그인 로직
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((UserCredential value) {
-      print('Login Success: ${value.user!.uid}');
-      Navigator.pop(context);
-    }).catchError((e) {
-      print('Login Failed: $e');
-      _loginMessageController.add(e.toString());
+    Login.login(email, password).then((value) {
+      if (value) {
+        print('Login 성공');
+        Navigator.pop(context);
+      }
+    }).catchError((onError) {
+      print('Login 실패: $onError');
+      _loginMessageController.add(onError.toString());
     });
-
-    // 로그인 성공 확인 (테스트 코드)
-    final User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      print('Login Success: ${user.uid}');
-    } else {
-      print('Login Failed');
-    }
   }
 
   @override
@@ -77,9 +69,22 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _login,
-              child: const Text('Login'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: _login,
+                  child: const Text('Login'),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()));
+                    },
+                    child: const Text('Sign Up'))
+              ],
             ),
             const SizedBox(height: 16.0),
             Row(
