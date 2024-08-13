@@ -27,7 +27,7 @@ class EventPageScreen extends StatelessWidget {
         date: "2024-08-12 ~ 2024-08-30",
         eventTitle:"블랙 프라이데이 슈퍼 세일 이벤트",
         description: "블랙 프라이데이 슈퍼 세일 이벤트에 대한 상세 내용들",
-        imageUrl: "https://cdn.discordapp.com/attachments/1242032785812750346/1272361007330885753/Pngtreeblack_friday_event_banner_background_1238994.jpg?ex=66bab207&is=66b96087&hm=0c158eb2831eec052c1907f869b868ce8405a72947ff9c367e6c3482926ce57f&",
+        imageUrl: "https://cdn.discordapp.com/attachments/1242032785812750346/1272361007330885753/Pngtreeblack_friday_event_banner_background_1238994.jpg?ex=66bb5ac7&is=66ba0947&hm=402689964fded8c7b3050fb814424b1457a33efb9cdfb99ef5327c27f0963497&",
       ),
       Event(
         date: "2024-08-01 ~ 2024-08-30",
