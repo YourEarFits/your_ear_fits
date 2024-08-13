@@ -33,7 +33,7 @@ class EventPageScreen extends StatelessWidget {
         date: "2024-08-01 ~ 2024-08-30",
         eventTitle:"3주년 기념 이벤트!!",
         description: "3주년 기념 이벤트에 대한 상세 내용들",
-        imageUrl: "https://media.discordapp.net/attachments/1242032785812750346/1272368857176080414/Pngtreecelebration_3rd_anniversary_banner_1598181.png?ex=66bab957&is=66b967d7&hm=02b498d991cdb57a898ad6f7c9cb8d450fd89cdd4cd7c914d507b9b9aac5ae7c&=&format=webp&quality=lossless&width=960&height=450",
+        imageUrl: "https://cdn.discordapp.com/attachments/1242032785812750346/1272368857176080414/Pngtreecelebration_3rd_anniversary_banner_1598181.png?ex=66bb6217&is=66ba1097&hm=827472457761610681175b4342b530df62d79cb105fa44808a8b5b4fd976243e&",
       ),
     ];
   }
@@ -76,7 +76,7 @@ class EventPageScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: const Text('이벤트'),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFAFAFA),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -103,10 +103,10 @@ class EventPageScreen extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
                           color: Colors.blue,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(15),
                           child: Image.network(
                             event.imageUrl,
                             fit: BoxFit.contain,
