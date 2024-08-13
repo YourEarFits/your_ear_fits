@@ -76,7 +76,7 @@ class EventPageScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: const Text('이벤트'),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFAFAFA),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
