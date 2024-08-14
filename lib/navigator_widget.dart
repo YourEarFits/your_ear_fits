@@ -50,12 +50,14 @@ class NavigatorWidget extends StatelessWidget {
         Column(
           children: [
             IconButton(
-              onPressed: () {Navigator.push(
+              onPressed: () {
+                Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const EarTestScreen(),
                 ),
-              );},
+                );
+                },
               icon: const Icon(Icons.earbuds, size: 50),
             ),
             const Text('귀 검사'),
