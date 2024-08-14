@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class EarTestScreen extends StatelessWidget {
   const EarTestScreen({super.key});
-  // 이벤트 페이지
+  // 귀 검사 페이지
   @override
   Widget build(BuildContext context) {
     return Scaffold(
