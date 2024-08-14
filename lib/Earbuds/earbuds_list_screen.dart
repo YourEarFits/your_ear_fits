@@ -7,13 +7,8 @@ class EarbudsListScreen extends StatelessWidget {
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
       _getEarbudsList() async {
     final earbudsSnapshot =
-        await FirebaseFirestore.instance.collection('Earbuds').get();
+        await FirebaseFirestore.instance.collection('products').get();
 
-    // 데이터 확인을 위한 코드
-    // for (final doc in earbudsSnapshot.docs) {
-    //   final name = doc.data()['name'];
-    //   print(name);
-    // }
     return earbudsSnapshot.docs;
   }
 
@@ -44,7 +39,11 @@ class EarbudsListScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final earbuds = earbudsList[index];
                         return ListTile(
+                          // 이미지 가져오기
+                          leading: Image.network(earbuds.data()['image_src']),
+                          // 제목
                           title: Text(earbuds.data()['name']),
+                          // 스펙
                           subtitle: Text(earbuds.data()['specs']),
                         );
                       },
