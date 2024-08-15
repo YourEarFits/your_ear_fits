@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:your_ear_fits/Earbuds/search_screen.dart';
 import 'package:your_ear_fits/event_page_screen.dart';
 import 'package:your_ear_fits/my_page_screen.dart';
 import 'package:your_ear_fits/ear_test_screen.dart';
@@ -32,7 +33,14 @@ class NavigatorWidget extends StatelessWidget {
         Column(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchScreen(),
+                  ),
+                );
+              },
               icon: const Icon(Icons.search, size: 50),
             ),
             const Text('검색'),

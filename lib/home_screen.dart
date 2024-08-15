@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/Earbuds/earbuds_list_screen.dart';
+import 'package:your_ear_fits/Earbuds/search_screen.dart';
 import 'package:your_ear_fits/navigator_widget.dart';
 import 'package:your_ear_fits/ear_test_screen.dart';
 
@@ -29,11 +30,24 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    labelText: '이어폰을 검색하세요!',
+                child: GestureDetector(
+                  onTap: () {
+                    // 버튼 클릭 시 검색 화면으로 이동
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchScreen(),
+                      ),
+                    );
+                  },
+                  child: AbsorbPointer(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        labelText: '이어폰을 검색하세요!',
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -53,8 +67,9 @@ class HomeScreen extends StatelessWidget {
                                   builder: (context) => const EarTestScreen(),
                                 ),
                               );
-                              },
-                            icon: const Icon(Icons.person_search_rounded, size: 50),
+                            },
+                            icon: const Icon(Icons.person_search_rounded,
+                                size: 50),
                           ),
                           const Text("귀 모양 검사")
                         ],
@@ -66,7 +81,8 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const EarbudsListScreen(),
+                                  builder: (context) =>
+                                      const EarbudsListScreen(),
                                 ),
                               );
                             },

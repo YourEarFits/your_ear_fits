@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:your_ear_fits/Earbuds/product_item_widget.dart';
 
 class EarbudsListScreen extends StatelessWidget {
   const EarbudsListScreen({super.key});
@@ -35,14 +36,7 @@ class EarbudsListScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final product =
                             snapshot.data![index] as Map<String, dynamic>;
-                        return ListTile(
-                          // 이미지
-                          leading: Image.network(product['image_src']),
-                          // 제목
-                          title: Text(product['name']),
-                          // 부제목
-                          subtitle: Text(product['specs']),
-                        );
+                        return ProductItemWidget(product: product);
                       },
                     ),
                   );
