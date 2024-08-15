@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/Earbuds/earbuds_list_screen.dart';
 import 'package:your_ear_fits/navigator_widget.dart';
+import 'package:your_ear_fits/ear_test_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -45,7 +46,14 @@ class HomeScreen extends StatelessWidget {
                       Column(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const EarTestScreen(),
+                                ),
+                              );
+                              },
                             icon: const Icon(Icons.person_search_rounded, size: 50),
                           ),
                           const Text("귀 모양 검사")

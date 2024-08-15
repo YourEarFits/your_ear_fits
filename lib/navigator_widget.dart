@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/event_page_screen.dart';
 import 'package:your_ear_fits/my_page_screen.dart';
+import 'package:your_ear_fits/ear_test_screen.dart';
 
 class NavigatorWidget extends StatelessWidget {
   const NavigatorWidget({
@@ -49,7 +50,14 @@ class NavigatorWidget extends StatelessWidget {
         Column(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EarTestScreen(),
+                ),
+                );
+                },
               icon: const Icon(Icons.earbuds, size: 50),
             ),
             const Text('귀 검사'),
