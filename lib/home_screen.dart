@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
+        // 상단 앱바
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: const Text(
@@ -23,6 +24,7 @@ class HomeScreen extends StatelessWidget {
           ),
           centerTitle: true,
         ),
+        // 홈 화면
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,9 +32,9 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                // 버튼 클릭 시 검색 화면으로 이동
                 child: GestureDetector(
                   onTap: () {
-                    // 버튼 클릭 시 검색 화면으로 이동
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -57,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      // 귀 모양 검사
                       Column(
                         children: [
                           IconButton(
@@ -74,6 +77,7 @@ class HomeScreen extends StatelessWidget {
                           const Text("귀 모양 검사")
                         ],
                       ),
+                      // 이어폰 보러가기
                       Column(
                         children: [
                           IconButton(

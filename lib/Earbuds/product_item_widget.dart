@@ -13,9 +13,9 @@ class ProductItemWidget extends StatelessWidget {
     return ListTile(
       // 이미지
       leading: Image.network(product['image_src']),
-      // 제목
+      // 상품 이름
       title: Text(product['name']),
-      // 부제목
+      // 상품 스펙
       subtitle: Text(product['specs']),
     );
   }

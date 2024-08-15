@@ -26,7 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search'),
+        title: const Text('이어폰 검색하세요!'),
       ),
       body: Center(
         child: Column(
@@ -55,9 +55,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(child: Text('오류: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No results found.'));
+                    return const Center(child: Text('검색 결과가 없습니다.'));
                   } else {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,

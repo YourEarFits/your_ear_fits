@@ -21,6 +21,7 @@ class MyPageScreen extends StatelessWidget {
             StreamBuilder(
               stream: Supabase.instance.client.auth.onAuthStateChange,
               builder: (context, snapshot) {
+                // 로그인 상태인 경우
                 if (snapshot.data?.session?.user.id != null) {
                   return Expanded(
                     child: Column(
@@ -29,21 +30,23 @@ class MyPageScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
+                            // 사용자 식별번호
                             Expanded(
                               flex: 1,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text('사용자'),
+                                  const Text('사용자 식별번호'),
                                   Text(snapshot.data!.session!.user.id),
                                 ],
                               ),
                             ),
+                            // 이메일 주소
                             Expanded(
                               flex: 1,
                               child: Column(
                                 children: [
-                                  const Text('이메일'),
+                                  const Text('이메일 주소'),
                                   Text("${snapshot.data!.session!.user.email}"),
                                 ],
                               ),
@@ -53,17 +56,19 @@ class MyPageScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
+                            // 전화번호
                             Expanded(
                               flex: 1,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text('전화번호'),
-                                  Text(snapshot.data!.session!.user.phone ??
-                                      ''),
+                                  Text(
+                                      snapshot.data!.session!.user.phone ?? ''),
                                 ],
                               ),
                             ),
+                            // 마지막 로그인
                             Expanded(
                               flex: 1,
                               child: Column(
@@ -76,12 +81,13 @@ class MyPageScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Text('로그인 되었습니다.'),
+                        const Text('로그인 상태입니다.'),
                         const LogoutWidget(),
                       ],
                     ),
                   );
                 } else {
+                  // 로그인 상태가 아닌 경우
                   return Column(
                     children: [
                       const Text('로그인이 필요합니다.'),
@@ -94,9 +100,7 @@ class MyPageScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text(
-                          'Login',
-                        ),
+                        child: const Text('로그인'),
                       ),
                     ],
                   );

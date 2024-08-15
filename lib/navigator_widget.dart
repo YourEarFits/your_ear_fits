@@ -14,6 +14,7 @@ class NavigatorWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        // 이벤트
         Column(
           children: [
             IconButton(
@@ -30,6 +31,7 @@ class NavigatorWidget extends StatelessWidget {
             const Text('이벤트'),
           ],
         ),
+        // 검색
         Column(
           children: [
             IconButton(
@@ -46,6 +48,7 @@ class NavigatorWidget extends StatelessWidget {
             const Text('검색'),
           ],
         ),
+        // 홈
         Column(
           children: [
             IconButton(
@@ -55,6 +58,7 @@ class NavigatorWidget extends StatelessWidget {
             const Text('홈'),
           ],
         ),
+        // 귀 검사
         Column(
           children: [
             IconButton(
@@ -71,6 +75,7 @@ class NavigatorWidget extends StatelessWidget {
             const Text('귀 검사'),
           ],
         ),
+        // 마이페이지
         Column(
           children: [
             IconButton(

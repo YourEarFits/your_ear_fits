@@ -23,11 +23,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
     Login.login(email, password).then((value) {
       if (value) {
-        print('Login 성공');
+        // 성공
         Navigator.pop(context);
       }
     }).catchError((onError) {
-      print('Login 실패: $onError');
+      // 실패
       _loginMessageController.add(onError.toString());
     });
   }
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('로그인'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: _emailController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'E-mail',
+                labelText: '이메일 주소',
               ),
             ),
             const SizedBox(height: 16.0),
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: _passwordController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Password',
+                labelText: '비밀번호',
               ),
               obscureText: true,
             ),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 ElevatedButton(
                   onPressed: _login,
-                  child: const Text('Login'),
+                  child: const Text('로그인'),
                 ),
                 ElevatedButton(
                     onPressed: () {
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           MaterialPageRoute(
                               builder: (context) => const SignUpScreen()));
                     },
-                    child: const Text('Sign Up'))
+                    child: const Text('회원가입'))
               ],
             ),
             const SizedBox(height: 16.0),
