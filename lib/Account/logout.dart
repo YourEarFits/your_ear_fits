@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class Logout{
+class Logout {
   static Future<void> logout() async {
-    // Firebase Auth 로그아웃
-    await FirebaseAuth.instance.signOut();
+    // 로그아웃
+    await Supabase.instance.client.auth.signOut();
   }
 }
