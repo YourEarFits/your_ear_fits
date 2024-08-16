@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'product_item_widget.dart';
+import 'product_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -26,8 +26,10 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text('이어폰 검색하세요!'),
       ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: [
@@ -63,7 +65,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         final product = snapshot.data![index];
-                        return ProductItemWidget(product: product);
+                        return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ProductWidget(productMap: product));
                       },
                     );
                   }
