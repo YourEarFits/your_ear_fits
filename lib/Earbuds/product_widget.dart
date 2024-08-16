@@ -1,29 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Product {
-  int id;
-  String imageSrc;
-  String name;
-  String headline;
-  String specs;
-  String releaseDate;
-  int reviewCount;
-  dynamic starScore;
-  String link;
-  List price;
-
-  Product(Map<String, dynamic> product)
-      : id = product['id'],
-        imageSrc = product['image_src'],
-        name = product['name'],
-        headline = product['headline'],
-        specs = product['specs'],
-        releaseDate = product['release_date'],
-        reviewCount = product['review_count'],
-        starScore = product['star_score'],
-        link = product['link'],
-        price = product['price'];
-}
+import 'product_model.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -33,9 +10,9 @@ class ProductWidget extends StatelessWidget {
 
   final Map<String, dynamic> productMap;
 
-  String displayPrice(Product product) {
+  String displayPrice(ProductModel productModel) {
     // '정품'이 포함된 요소를 찾습니다.
-    final priceItem = product.price.firstWhere(
+    final priceItem = productModel.price.firstWhere(
       (item) => item[0] == '정품',
       orElse: () => null, // '정품'이 없을 경우 null 반환
     );
@@ -43,15 +20,15 @@ class ProductWidget extends StatelessWidget {
     if (priceItem != null) {
       // '정품'이 있을 경우 그 가격을 반환합니다.
       return priceItem[1] + ' 원';
-    } else if (product.price.length == 1) {
+    } else if (productModel.price.length == 1) {
       // 가격 리스트에 하나의 항목만 있는 경우 그 가격을 반환합니다.
-      return product.price[0][1] + ' 원';
-    } else if (product.price.isNotEmpty) {
+      return productModel.price[0][1] + ' 원';
+    } else if (productModel.price.isNotEmpty) {
       // '정품'이 없고 여러 가격이 있는 경우, 모든 모델과 가격을 반환합니다.
       String result = '';
-      for (var i in product.price) {
+      for (var i in productModel.price) {
         // 마지막 요소인 경우 줄바꿈 없이 출력
-        if (i[0] == product.price[product.price.length - 1][0]) {
+        if (i[0] == productModel.price[productModel.price.length - 1][0]) {
           result += '${i[0]}: ${i[1]} 원';
         } else {
           result += '${i[0]}: ${i[1]} 원\n';
@@ -64,18 +41,18 @@ class ProductWidget extends StatelessWidget {
     }
   }
 
-  String displaySpecs(Product product) {
+  String displaySpecs(ProductModel productModel) {
     // 스펙이 75자 이상인 경우 75자까지만 표시하고 '...'을 붙입니다.
-    if (product.specs.length > 75) {
-      return '${product.specs.substring(0, 75)}...';
+    if (productModel.specs.length > 75) {
+      return '${productModel.specs.substring(0, 75)}...';
     } else {
-      return product.specs;
+      return productModel.specs;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Product product = Product(productMap);
+    final ProductModel productModel = ProductModel(productMap);
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA), // 배경색 설정
@@ -99,7 +76,7 @@ class ProductWidget extends StatelessWidget {
                     width: 0.25,
                   ),
                 ),
-                child: Image.network(product.imageSrc),
+                child: Image.network(productModel.imageSrc),
               ),
             ),
           ),
@@ -110,21 +87,21 @@ class ProductWidget extends StatelessWidget {
               children: [
                 // 상품 이름
                 Text(
-                  product.name,
+                  productModel.name,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 // 상품 가격
-                Text(displayPrice(product),
+                Text(displayPrice(productModel),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     )),
                 // 상품 스펙
                 Text(
-                  displaySpecs(product),
+                  displaySpecs(productModel),
                   style: const TextStyle(
                     fontSize: 14,
                   ),

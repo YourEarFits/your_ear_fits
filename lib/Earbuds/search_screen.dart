@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_widget.dart';
 
-import 'product_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -50,30 +50,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 },
               ),
             ),
-            Expanded(
-              child: FutureBuilder(
-                future: searchResults,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('오류: ${snapshot.error}'));
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('검색 결과가 없습니다.'));
-                  } else {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        final product = snapshot.data![index];
-                        return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ProductWidget(productMap: product));
-                      },
-                    );
-                  }
-                },
-              ),
-            ),
+            // 검색 결과를 표시할 위젯(결과는 searchResults 변수에 저장됨)
+            EarbudsListWidget(searchResults: searchResults),
           ],
         ),
       ),
