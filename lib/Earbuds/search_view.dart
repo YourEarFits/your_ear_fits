@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:your_ear_fits/Earbuds/earbuds_list_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_view_model.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_view.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class SearchView extends StatefulWidget {
+  /// 이어폰 검색 화면
+  const SearchView({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchViewState extends State<SearchView> {
   // 텍스트 필드 컨트롤러
   TextEditingController searchController = TextEditingController();
-
-  // 검색 결과를 저장할 변수
-  Future<List<Map<String, dynamic>>>? searchResults;
-
-  Future<List<Map<String, dynamic>>> _getEarbudsList(String search) async {
-    final supabase = Supabase.instance.client;
-    final data = await supabase.from('products').select().or(
-        'name.ilike.%$search%,headline.ilike.%$search%,specs.ilike.%$search%,release_date.ilike.%$search%');
-
-    return data;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +37,26 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderRadius: BorderRadius.circular(10.0)),
                   labelText: '이어폰을 검색하세요!',
                 ),
+
+                // 검색어를 입력하고 엔터를 누르면 검색 결과 화면으로 이동
                 onSubmitted: (value) {
-                  // 검색어를 입력하고 엔터를 누르면 검색 결과 화면으로 이동
-                  setState(() {
-                    searchResults = _getEarbudsList(searchController.text);
+                  // 이어폰 뷰 모델을 가져와서
+                  // 검색어를 전달
+                  // 검색 결과 화면으로 이동
+                  context
+                      .read<EarbudsListViewModel>()
+                      .loadEarbudsList(searchValue: value)
+                      .then((_) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EarbudsListView(),
+                      ),
+                    );
                   });
                 },
               ),
             ),
-            // 검색 결과를 표시할 위젯(결과는 searchResults 변수에 저장됨)
-            EarbudsListWidget(searchResults: searchResults),
           ],
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:your_ear_fits/Earbuds/earbuds_list_screen.dart';
-import 'package:your_ear_fits/Earbuds/search_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_view.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_view_model.dart';
+import 'package:your_ear_fits/Earbuds/search_view.dart';
 import 'package:your_ear_fits/navigator_widget.dart';
 import 'package:your_ear_fits/ear_test_screen.dart';
 
@@ -38,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SearchScreen(),
+                        builder: (context) => const SearchView(),
                       ),
                     );
                   },
@@ -82,13 +84,21 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const EarbudsListScreen(),
-                                ),
-                              );
+                              // 이어폰 뷰 모델을 가져와서
+                              // 이어폰 리스트를 불러온 후
+                              // 이어폰 리스트 화면으로 이동
+                              context
+                                  .read<EarbudsListViewModel>()
+                                  .loadEarbudsList()
+                                  .then((_) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const EarbudsListView(),
+                                  ),
+                                );
+                              });
                             },
                             icon: const Icon(Icons.search, size: 50),
                           ),

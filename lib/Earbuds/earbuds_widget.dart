@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'product_model.dart';
+import 'earbuds_model.dart';
 
-class ProductWidget extends StatelessWidget {
-  const ProductWidget({
+class EarbudsWidget extends StatelessWidget {
+  final EarbudsModel earbudsModel;
+
+  /// 리스트에서 각 상품을 표시하는 위젯
+  const EarbudsWidget({
     super.key,
-    required this.productMap,
+    required this.earbudsModel,
   });
 
-  final Map<String, dynamic> productMap;
-
-  Widget displayPrice(ProductModel productModel) {
+  /// 가격 정보를 표시합니다.
+  Widget displayPrice() {
     // 가격 정보가 없는 경우
-    if (productModel.price.isEmpty) {
+    if (earbudsModel.price.isEmpty) {
       return const Column(
         children: [
           Text(
@@ -26,8 +28,8 @@ class ProductWidget extends StatelessWidget {
       );
     }
     // 가격 정보가 하나만 있는 경우
-    else if (productModel.price.length == 1) {
-      for (var i in productModel.price) {
+    else if (earbudsModel.price.length == 1) {
+      for (var i in earbudsModel.price) {
         return Column(
           children: [
             Text(
@@ -42,8 +44,8 @@ class ProductWidget extends StatelessWidget {
       }
     }
     // 가격 정보에 '정품'이 포함된 경우
-    else if (productModel.price.any((i) => i[0] == '정품')) {
-      for (var i in productModel.price) {
+    else if (earbudsModel.price.any((i) => i[0] == '정품')) {
+      for (var i in earbudsModel.price) {
         if (i[0] == '정품') {
           return Column(
             children: [
@@ -64,7 +66,7 @@ class ProductWidget extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (var i in productModel.price)
+          for (var i in earbudsModel.price)
             Text(
               '${i[0]}: ${i[1]} 원',
               style: const TextStyle(
@@ -78,18 +80,17 @@ class ProductWidget extends StatelessWidget {
     return const Column();
   }
 
-  String displaySpecs(ProductModel productModel) {
-    // 스펙이 75자 이상인 경우 75자까지만 표시하고 '...'을 붙입니다.
-    if (productModel.specs.length > 75) {
-      return '${productModel.specs.substring(0, 75)}...';
+  /// 스펙이 75자 이상인 경우 75자까지만 표시하고 '...'을 붙입니다.
+  String displaySpecs() {
+    if (earbudsModel.specs.length > 75) {
+      return '${earbudsModel.specs.substring(0, 75)}...';
     } else {
-      return productModel.specs;
+      return earbudsModel.specs;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final ProductModel productModel = ProductModel(productMap);
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA), // 배경색 설정
@@ -113,7 +114,7 @@ class ProductWidget extends StatelessWidget {
                     width: 0.25,
                   ),
                 ),
-                child: Image.network(productModel.imageSrc),
+                child: Image.network(earbudsModel.imageSrc),
               ),
             ),
           ),
@@ -124,17 +125,17 @@ class ProductWidget extends StatelessWidget {
               children: [
                 // 상품 이름
                 Text(
-                  productModel.name,
+                  earbudsModel.name,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 // 상품 가격
-                displayPrice(productModel),
+                displayPrice(),
                 // 상품 스펙
                 Text(
-                  displaySpecs(productModel),
+                  displaySpecs(),
                   style: const TextStyle(
                     fontSize: 14,
                   ),
