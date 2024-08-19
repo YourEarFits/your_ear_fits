@@ -10,8 +10,8 @@ class EarTestScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: const Text('귀 검사'),
       ),
-        backgroundColor: Color(0xFFFAFAFA),
-      body: Center(
+        backgroundColor: const Color(0xFFFAFAFA),
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

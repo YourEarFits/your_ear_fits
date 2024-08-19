@@ -6,10 +6,11 @@ class LogoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 로그아웃 버튼
     return const ElevatedButton(
       onPressed: Logout.logout,
       child: Text(
-        'Logout',
+        '로그아웃',
       ),
     );
   }

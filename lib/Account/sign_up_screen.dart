@@ -22,12 +22,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     SignUp.signUp(email, password).then((value) {
       if (value) {
-        print('Sign Up 성공');
+        // 성공
         Navigator.pop(context); // 회원가입 성공 시 로그인 화면으로 이동
         Navigator.pop(context); // 마이페이지로 이동
       }
     }).catchError((onError) {
-      print('Sign Up 실패: $onError');
+      // 실패
       _loginMessageController.add(onError.toString());
     });
   }
@@ -36,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: const Text('회원가입'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               controller: _emailController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'E-mail',
+                labelText: '이메일 주소',
               ),
             ),
             const SizedBox(height: 16.0),
@@ -54,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               controller: _passwordController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Password',
+                labelText: '비밀번호',
               ),
               obscureText: true,
             ),
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ElevatedButton(
               onPressed: pressedSignUp,
               child: const Text(
-                'Sign Up',
+                '회원가입',
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/Earbuds/earbuds_list_screen.dart';
+import 'package:your_ear_fits/Earbuds/search_screen.dart';
 import 'package:your_ear_fits/navigator_widget.dart';
 import 'package:your_ear_fits/ear_test_screen.dart';
 
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
+        // 상단 앱바
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: const Text(
@@ -22,6 +24,7 @@ class HomeScreen extends StatelessWidget {
           ),
           centerTitle: true,
         ),
+        // 홈 화면
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,11 +32,24 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    labelText: '이어폰을 검색하세요!',
+                // 버튼 클릭 시 검색 화면으로 이동
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchScreen(),
+                      ),
+                    );
+                  },
+                  child: AbsorbPointer(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        labelText: '이어폰을 검색하세요!',
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -43,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      // 귀 모양 검사
                       Column(
                         children: [
                           IconButton(
@@ -53,12 +70,14 @@ class HomeScreen extends StatelessWidget {
                                   builder: (context) => const EarTestScreen(),
                                 ),
                               );
-                              },
-                            icon: const Icon(Icons.person_search_rounded, size: 50),
+                            },
+                            icon: const Icon(Icons.person_search_rounded,
+                                size: 50),
                           ),
                           const Text("귀 모양 검사")
                         ],
                       ),
+                      // 이어폰 보러가기
                       Column(
                         children: [
                           IconButton(
@@ -66,7 +85,8 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const EarbudsListScreen(),
+                                  builder: (context) =>
+                                      const EarbudsListScreen(),
                                 ),
                               );
                             },
