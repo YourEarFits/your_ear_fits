@@ -8,7 +8,7 @@ class ProductModel {
   int reviewCount;
   dynamic starScore;
   String link;
-  List price;
+  List<dynamic> price;
 
   ProductModel(Map<String, dynamic> productMap)
       : id = productMap['id'],

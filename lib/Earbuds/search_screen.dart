@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:your_ear_fits/Earbuds/earbuds_list_widget.dart';
 
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -11,6 +10,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  // 텍스트 필드 컨트롤러
+  TextEditingController searchController = TextEditingController();
+
   // 검색 결과를 저장할 변수
   Future<List<Map<String, dynamic>>>? searchResults;
 
@@ -36,6 +38,8 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: TextField(
+                // 텍스트 필드 컨트롤러를 지정
+                controller: searchController,
                 autofocus: true, // 자동으로 포커스를 줌
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -45,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 onSubmitted: (value) {
                   // 검색어를 입력하고 엔터를 누르면 검색 결과 화면으로 이동
                   setState(() {
-                    searchResults = _getEarbudsList(value);
+                    searchResults = _getEarbudsList(searchController.text);
                   });
                 },
               ),

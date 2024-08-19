@@ -10,35 +10,72 @@ class ProductWidget extends StatelessWidget {
 
   final Map<String, dynamic> productMap;
 
-  String displayPrice(ProductModel productModel) {
-    // '정품'이 포함된 요소를 찾습니다.
-    final priceItem = productModel.price.firstWhere(
-      (item) => item[0] == '정품',
-      orElse: () => null, // '정품'이 없을 경우 null 반환
-    );
-
-    if (priceItem != null) {
-      // '정품'이 있을 경우 그 가격을 반환합니다.
-      return priceItem[1] + ' 원';
-    } else if (productModel.price.length == 1) {
-      // 가격 리스트에 하나의 항목만 있는 경우 그 가격을 반환합니다.
-      return productModel.price[0][1] + ' 원';
-    } else if (productModel.price.isNotEmpty) {
-      // '정품'이 없고 여러 가격이 있는 경우, 모든 모델과 가격을 반환합니다.
-      String result = '';
+  Widget displayPrice(ProductModel productModel) {
+    // 가격 정보가 없는 경우
+    if (productModel.price.isEmpty) {
+      return const Column(
+        children: [
+          Text(
+            '가격 정보 없음',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      );
+    }
+    // 가격 정보가 하나만 있는 경우
+    else if (productModel.price.length == 1) {
       for (var i in productModel.price) {
-        // 마지막 요소인 경우 줄바꿈 없이 출력
-        if (i[0] == productModel.price[productModel.price.length - 1][0]) {
-          result += '${i[0]}: ${i[1]} 원';
-        } else {
-          result += '${i[0]}: ${i[1]} 원\n';
+        return Column(
+          children: [
+            Text(
+              '${i[1]} 원',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        );
+      }
+    }
+    // 가격 정보에 '정품'이 포함된 경우
+    else if (productModel.price.any((i) => i[0] == '정품')) {
+      for (var i in productModel.price) {
+        if (i[0] == '정품') {
+          return Column(
+            children: [
+              Text(
+                '${i[1]} 원',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          );
         }
       }
-      return result;
-    } else {
-      // 가격 리스트가 비어 있을 경우
-      return '가격 정보 없음';
     }
+    // 가격 정보에 '정품'이 포함되지 않은 경우
+    else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (var i in productModel.price)
+            Text(
+              '${i[0]}: ${i[1]} 원',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+        ],
+      );
+    }
+    return const Column();
   }
 
   String displaySpecs(ProductModel productModel) {
@@ -94,11 +131,7 @@ class ProductWidget extends StatelessWidget {
                   ),
                 ),
                 // 상품 가격
-                Text(displayPrice(productModel),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    )),
+                displayPrice(productModel),
                 // 상품 스펙
                 Text(
                   displaySpecs(productModel),
