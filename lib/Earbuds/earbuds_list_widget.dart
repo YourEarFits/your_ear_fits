@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_ear_fits/Earbuds/product_widget.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_detail_screen.dart';
+import 'package:your_ear_fits/Earbuds/product_model.dart';
 
 class EarbudsListWidget extends StatelessWidget {
   final Future<List<Map<String, dynamic>>>? searchResults;
@@ -22,10 +24,27 @@ class EarbudsListWidget extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                final product = snapshot.data![index];
-                return Padding(
+                final productMap =
+                    snapshot.data![index] as Map<String, dynamic>;
+                final productModel = ProductModel(productMap);
+
+                return GestureDetector(
+                  // 터치 이벤트를 감지하는 GestureDetector 추가
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EarbudsDetailScreen(
+                            product: productModel), // 페이지 이동
+                      ),
+                    );
+                  },
+
+                  child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ProductWidget(productMap: product));
+                    child: ProductWidget(productMap: productMap),
+                  ),
+                );
               },
             );
           }
