@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'product_model.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_model.dart';
 
 class EarbudsDetailScreen extends StatelessWidget {
-  final ProductModel product;
+  final EarbudsModel earbudsModel;
 
-  const EarbudsDetailScreen({super.key, required this.product});
+  const EarbudsDetailScreen({super.key, required this.earbudsModel});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.name), // AppBar에 이어폰 이름 표시
+        title: Text(earbudsModel.name), // AppBar에 이어폰 이름 표시
         backgroundColor: Colors.white,
       ),
       body: Column(
@@ -25,12 +25,12 @@ class EarbudsDetailScreen extends StatelessWidget {
                   children: [
                     // 이어폰 이미지
                     Center(
-                      child: Image.network(product.imageSrc),
+                      child: Image.network(earbudsModel.imageSrc),
                     ),
                     const SizedBox(height: 16),
                     // 이어폰 이름
                     Text(
-                      product.name,
+                      earbudsModel.name,
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class EarbudsDetailScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     // 이어폰 가격
                     Text(
-                      '가격: ${product.price.join(", ")} 원',
+                      '가격: ${earbudsModel.price.join(", ")} 원',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -48,7 +48,7 @@ class EarbudsDetailScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     // 이어폰 스펙
                     Text(
-                      '스펙: ${product.specs}',
+                      '스펙: ${earbudsModel.specs}',
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -63,7 +63,7 @@ class EarbudsDetailScreen extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
                 BoxShadow(

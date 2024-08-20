@@ -8,10 +8,10 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final StreamController<String> _loginMessageController =
@@ -24,7 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
     Login.login(email, password).then((value) {
       if (value) {
         // 성공
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+        }
       }
     }).catchError((onError) {
       // 실패

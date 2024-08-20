@@ -23,8 +23,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     SignUp.signUp(email, password).then((value) {
       if (value) {
         // 성공
-        Navigator.pop(context); // 회원가입 성공 시 로그인 화면으로 이동
-        Navigator.pop(context); // 마이페이지로 이동
+        if (mounted) {
+          Navigator.pop(context); // 회원가입 성공 시 로그인 화면으로 이동
+          Navigator.pop(context); // 마이페이지로 이동
+        }
       }
     }).catchError((onError) {
       // 실패

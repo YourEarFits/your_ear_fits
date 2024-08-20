@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:your_ear_fits/Earbuds/earbuds_list_view_model.dart';
 import 'package:your_ear_fits/home_screen.dart';
 
 Future<void> main() async {
@@ -17,7 +19,12 @@ Future<void> main() async {
   );
 
   // 앱 실행
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => EarbudsListViewModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
