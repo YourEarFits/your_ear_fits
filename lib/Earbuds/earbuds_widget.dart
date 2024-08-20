@@ -101,59 +101,62 @@ class EarbudsWidget extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFFFAFAFA), // 배경색 설정
-          border: Border.all(
-            color: Colors.grey, // 테두리 색상
-            width: 0.5,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFFAFAFA), // 배경색 설정
+            border: Border.all(
+              color: Colors.grey, // 테두리 색상
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(8.0),
           ),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Row(
-          children: [
-            // 이미지
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey, // 테두리 색상
-                      width: 0.25,
+          child: Row(
+            children: [
+              // 이미지
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey, // 테두리 색상
+                        width: 0.25,
+                      ),
                     ),
+                    child: Image.network(earbudsModel.imageSrc),
                   ),
-                  child: Image.network(earbudsModel.imageSrc),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 7,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 상품 이름
-                  Text(
-                    earbudsModel.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+              Expanded(
+                flex: 7,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 상품 이름
+                    Text(
+                      earbudsModel.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  // 상품 가격
-                  displayPrice(),
-                  // 상품 스펙
-                  Text(
-                    displaySpecs(),
-                    style: const TextStyle(
-                      fontSize: 14,
+                    // 상품 가격
+                    displayPrice(),
+                    // 상품 스펙
+                    Text(
+                      displaySpecs(),
+                      style: const TextStyle(
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
