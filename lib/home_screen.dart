@@ -91,13 +91,15 @@ class HomeScreen extends StatelessWidget {
                                   .read<EarbudsListViewModel>()
                                   .loadEarbudsList()
                                   .then((_) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const EarbudsListView(),
-                                  ),
-                                );
+                                if (context.mounted) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EarbudsListView(),
+                                    ),
+                                  );
+                                }
                               });
                             },
                             icon: const Icon(Icons.search, size: 50),

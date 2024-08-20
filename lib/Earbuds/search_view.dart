@@ -47,12 +47,14 @@ class _SearchViewState extends State<SearchView> {
                       .read<EarbudsListViewModel>()
                       .loadEarbudsList(searchValue: value)
                       .then((_) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const EarbudsListView(),
-                      ),
-                    );
+                    if (context.mounted) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const EarbudsListView(),
+                        ),
+                      );
+                    }
                   });
                 },
               ),
